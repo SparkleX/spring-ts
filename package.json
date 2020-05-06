@@ -4,15 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build": "tsc"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^25.2.1",
     "jest": "^25.5.4",
+    "jsonfile": "^6.0.1",
+    "jsonschema": "^1.2.6",
+    "pg": "^8.0.3",
     "sql.js": "^1.2.2",
     "ts-jest": "^25.4.0",
     "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "cls-hooked": "^4.2.2",
+    "inversify": "^5.0.1",
+    "reflect-metadata": "^0.1.13",
+    "winston": "^3.2.1"
   }
 }
