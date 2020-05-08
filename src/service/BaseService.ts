@@ -1,12 +1,8 @@
-import "reflect-metadata";
-import { injectable, inject, postConstruct, Container } from "inversify";
 import { BaseRepository } from "../repository/BaseRepository";
 
-@injectable()
 export abstract class BaseService<T, ID, REPO extends BaseRepository<T, ID>> {
 	protected repo: REPO;
 
-    @postConstruct()
     public init(): void {
         this.repo = this.initRepo();
 	}
@@ -20,7 +16,6 @@ export abstract class BaseService<T, ID, REPO extends BaseRepository<T, ID>> {
         return object;
     }
     protected async onIsValid(object: T): Promise<void> {}
-
     public async findAll(): Promise<T[]> {
         return await this.repo.findAll();
     }
@@ -28,6 +23,6 @@ export abstract class BaseService<T, ID, REPO extends BaseRepository<T, ID>> {
         return this.repo.delete(id);
     }
     public async update(id: ID, object: T): Promise<void> {
-       return this.repo.updateById(id, object);
+       return this.repo.update(id, object);
     }
 }
