@@ -1,9 +1,9 @@
 module.exports = {
   transform: {
-    "^.+\\.tsx?$": "ts-jest"
+    "^.+\\.ts$": "ts-jest"
   },
-  testRegex: "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
-  moduleFileExtensions: ["ts", "tsx", "js", "jsx", "json", "node"],
+  testRegex: "(/__tests__/.*|(\\.|/)spec)\\.ts$",
+  moduleFileExtensions: ["ts","js"],
   collectCoverage: true,
   coverageDirectory: "coverage",
   coverageReporters: ["lcov", "text"],

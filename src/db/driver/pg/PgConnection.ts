@@ -1,5 +1,6 @@
 import { Connection, Result } from '../..';
 import { Client } from 'pg';
+/* istanbul ignore file */
 export class PgConnection implements Connection{
 
 	private client: any;

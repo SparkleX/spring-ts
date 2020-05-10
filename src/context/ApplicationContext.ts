@@ -24,7 +24,9 @@ export class ApplicationContext {
 				await conn.commit();
 				return result;
 			} catch (error) {
+				/* istanbul ignore next */
 				await conn.rollback();
+				/* istanbul ignore next */
 				throw error;
 			} finally {
 				await conn.close();
@@ -40,6 +42,7 @@ export class ApplicationContext {
 				const result = await func();				
 				return result;
 			} catch (error) {
+				/* istanbul ignore next */
 				throw error;
 			} finally {
 				await conn.close();

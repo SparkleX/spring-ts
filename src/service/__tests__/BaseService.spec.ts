@@ -20,8 +20,8 @@ ExampleRepo.prototype.findById = mockFindById;
 const mockCreate =  jest.fn();
 ExampleRepo.prototype.insert = mockCreate;
 
-const mockUpdateById =  jest.fn();
-ExampleRepo.prototype.updateById = mockUpdateById;
+const mockUpdate =  jest.fn();
+ExampleRepo.prototype.update = mockUpdate;
 
 const mockDelete =  jest.fn();
 ExampleRepo.prototype.delete = mockDelete;
@@ -46,9 +46,9 @@ test("updateById", async () => {
 	const id = { id: 1 };
 	const data = { id: 1, data: 2 };
 	await service.update(id, data);
-	expect(mockUpdateById.mock.instances.length).toBe(1);
-	expect(mockUpdateById.mock.calls[0][0]).toBe(id);
-	expect(mockUpdateById.mock.calls[0][1]).toBe(data);
+	expect(mockUpdate.mock.instances.length).toBe(1);
+	expect(mockUpdate.mock.calls[0][0]).toBe(id);
+	expect(mockUpdate.mock.calls[0][1]).toBe(data);
 });
 
 

@@ -11,9 +11,11 @@
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^25.2.1",
+    "@types/mysql": "^2.15.10",
     "jest": "^25.5.4",
     "jsonfile": "^6.0.1",
     "jsonschema": "^1.2.6",
+    "mysql": "^2.18.1",
     "pg": "^8.0.3",
     "sql.js": "^1.2.2",
     "ts-jest": "^25.4.0",

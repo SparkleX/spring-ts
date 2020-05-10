@@ -1,5 +1,5 @@
 import { createNamespace } from 'cls-hooked';
-import { SqlJsConnectionPool, ApplicationContext, Connection, initSqlJs, txTransaction, logger, txAutoCommit } from '../../src';
+import { SqlJsConnectionPool, ApplicationContext, Connection, initSqlJs, txTransaction, logger, txAutoCommit } from '../..';
 
 
 
