@@ -27,12 +27,16 @@ const mockDelete =  jest.fn();
 ExampleRepo.prototype.delete = mockDelete;
 
 class ExampleService extends BaseService<Example, any, ExampleRepo> {
-	initRepo(): ExampleRepo {
-		return new ExampleRepo();
+	repo: ExampleRepo;
+	constructor() {
+		super();
+		this.repo = new ExampleRepo();
+	}
+	getRepository(): ExampleRepo {
+		return this.repo;
 	}
 }
 const service = new ExampleService();
-service.init();
 
 test("create", async () => {
 	const data = { a: 1 };

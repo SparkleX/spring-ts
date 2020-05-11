@@ -3,20 +3,19 @@ import { Result } from "../db/Result";
 import { ApplicationContext } from "../context";
 
 export abstract class BaseRepository<T, ID>{
-	static quote:string = '"';
-	protected tableName: string;
 
 	protected async getConnection(): Promise<Connection> {
 		const conn = await ApplicationContext.DEFAULT.getConnection();
 		return conn;
 	}
-	public init() {
-		this.tableName = this.initTableName();
+	protected abstract getTableName(): string;
+	protected getQuote(): string {
+		return "";
 	}
-	public abstract initTableName(): string;
+
 	public async findAll():Promise<T[]> {
 		
-		var sql = `select * from ${BaseRepository.quote}${this.tableName}${BaseRepository.quote}`;
+		var sql = `select * from ${this.getQuote()}${this.getTableName()}${this.getQuote()}`;
 		console.log(sql);
 		var result = await this.execute(sql);
 		return result.data;
@@ -31,7 +30,7 @@ export abstract class BaseRepository<T, ID>{
 		var columns:string[] = this.getIdColumns(id);
 		var values = this.getValues(id, columns);
 		var condition = this.sqlKeys(columns);
-		var sql = `select * from ${BaseRepository.quote}${this.tableName}${BaseRepository.quote} where ${condition}`;
+		var sql = `select * from ${this.getQuote()}${this.getTableName()}${this.getQuote()} where ${condition}`;
 		console.log(sql);
 		var result: Result = await this.execute(sql, values);
 		if(result.data.length==0) {
@@ -44,14 +43,14 @@ export abstract class BaseRepository<T, ID>{
 		var values = this.getValues(id, columns);
 
 		var condition = this.sqlKeys(columns);
-		var sql = `delete from ${BaseRepository.quote}${this.tableName}${BaseRepository.quote} where ${condition}`;
+		var sql = `delete from ${this.getQuote()}${this.getTableName()}${this.getQuote()} where ${condition}`;
 		console.log(sql);
 		await this.execute(sql, values);
 	}		
 	private sqlKeys(columns: string[]) {
 		var rt = "";
 		for(let col of columns) {
-			rt = rt  + `${BaseRepository.quote}${col}${BaseRepository.quote}=? and `;
+			rt = rt  + `${this.getQuote()}${col}${this.getQuote()}=? and `;
 		}
 		var sql = rt.substr(0, rt.length-5);
 		return sql;
@@ -61,14 +60,14 @@ export abstract class BaseRepository<T, ID>{
 		var values = this.getValues(data, columns);
 		var sqlInsertColumns = this.sqlInsertColumns(columns);
 		var sqlInsert = this.sqlInsert(columns);
-		var sql = `insert into ${BaseRepository.quote}${this.tableName}${BaseRepository.quote}(${sqlInsertColumns}) values(${sqlInsert})`;
+		var sql = `insert into ${this.getQuote()}${this.getTableName()}${this.getQuote()}(${sqlInsertColumns}) values(${sqlInsert})`;
 		console.log(sql);
 		await this.execute(sql, values);
 	}
 	private sqlInsertColumns(columns: string[]) {
 		var rt = "";
 		for(let col of columns) {
-			rt = rt  + `${BaseRepository.quote}${col}${BaseRepository.quote},`;
+			rt = rt  + `${this.getQuote()}${col}${this.getQuote()},`;
 		}
 		var sql = rt.substr(0, rt.length-1);
 		return sql;
@@ -87,7 +86,7 @@ export abstract class BaseRepository<T, ID>{
 		var sqlUpdate = this.sqlUpdate(columns);
 		var idColumns:string[] = this.getIdColumns(id);
 		var sqlWhere = this.sqlKeys(idColumns);
-		var sql = `update ${BaseRepository.quote}${this.tableName}${BaseRepository.quote} set ${sqlUpdate} where ${sqlWhere}`;
+		var sql = `update ${this.getQuote()}${this.getTableName()}${this.getQuote()} set ${sqlUpdate} where ${sqlWhere}`;
 		console.log(sql);
 		var idColumn = this.getIdColumns(id);
 		var idValue = this.getValues(id, idColumns);
@@ -97,7 +96,7 @@ export abstract class BaseRepository<T, ID>{
 	private sqlUpdate(columns: string[]) {
 		var rt = "";
 		for(let col of columns) {
-			rt = rt  + `${BaseRepository.quote}${col}${BaseRepository.quote}=?,`;
+			rt = rt  + `${this.getQuote()}${col}${this.getQuote()}=?,`;
 		}
 		var sql = rt.substr(0, rt.length-1);
 		return sql;

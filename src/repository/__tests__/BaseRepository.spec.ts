@@ -12,13 +12,15 @@ ApplicationContext.DEFAULT = {
 } as any;
 
 class ExampleRepo extends BaseRepository<any, any> {
-	public initTableName(): string {
+	protected getTableName(): string {
 		return "Example";
+	}
+	protected getQuote(): string {
+		return '"';
 	}
 }
 
 const repo = new ExampleRepo();
-repo.init();
 
 beforeEach(() => {
 	mockExecute.mockClear();

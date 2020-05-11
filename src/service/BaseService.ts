@@ -1,28 +1,25 @@
 import { BaseRepository } from "../repository/BaseRepository";
 
 export abstract class BaseService<T, ID, REPO extends BaseRepository<T, ID>> {
-	protected repo: REPO;
 
-    public init(): void {
-        this.repo = this.initRepo();
-	}
-	abstract initRepo () : REPO;
+	abstract getRepository(): REPO;
+
     public async findById(key: ID): Promise<T> {
-		return this.repo.findById(key);
+		return this.getRepository().findById(key);
     }
     public async create(object: T): Promise<T> {
         await this.onIsValid(object);
-        await this.repo.insert(object);
+        await this.getRepository().insert(object);
         return object;
     }
     protected async onIsValid(object: T): Promise<void> {}
     public async findAll(): Promise<T[]> {
-        return await this.repo.findAll();
+        return await this.getRepository().findAll();
     }
     public async delete(id: ID): Promise<void> {
-        return this.repo.delete(id);
+        return this.getRepository().delete(id);
     }
     public async update(id: ID, object: T): Promise<void> {
-       return this.repo.update(id, object);
+       return this.getRepository().update(id, object);
     }
 }
