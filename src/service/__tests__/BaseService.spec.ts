@@ -6,10 +6,9 @@ interface Example {
 }
 
 class ExampleRepo extends BaseRepository<Example, any> {
-	public initTableName(): string {
+	protected getTableName(): string {
 		return "example";
 	}
-
 }
 const mockFindAll =  jest.fn();
 ExampleRepo.prototype.findAll = mockFindAll;

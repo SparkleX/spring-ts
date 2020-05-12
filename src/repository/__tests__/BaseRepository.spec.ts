@@ -16,6 +16,7 @@ class ExampleRepo extends BaseRepository<any, any> {
 		return "Example";
 	}
 	protected getQuote(): string {
+		super.getQuote();
 		return '"';
 	}
 }
