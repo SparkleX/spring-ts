@@ -1,13 +1,13 @@
 {
-  "name": "ts-spring",
+  "name": "spring-x",
   "version": "0.9.0",
-  "description": "",
+  "description": "Spring in TypeScript",
   "main": "dist/index.js",
   "scripts": {
     "test": "jest",
     "build": "tsc"
   },
-  "author": "",
+  "author": "Sun, Xufei",
   "license": "ISC",
   "devDependencies": {
     "@types/cls-hooked": "^4.3.0",
