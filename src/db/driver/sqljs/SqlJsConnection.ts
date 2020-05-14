@@ -16,7 +16,7 @@ export class SqlJsConnection implements Connection{
 	}
 
 	public async execute(sql: string, params?: any[]): Promise<Result> {
-		console.log(`SqlJsConnection.execute: ${sql} : [${params}]`);
+		console.debug(`SqlJsConnection.execute: ${sql} : [${params}]`);
 		let result: Result = {};
 		var stmt = this.db.prepare(sql,params);
 		result.data = [];

@@ -13,7 +13,7 @@ export class PgConnection implements Connection{
         await this.client.connect();
 	}
 	public async execute(sql: string, params?: any[]): Promise<Result> {
-		console.log(`PgConnection.execute: ${sql}`);
+		console.debug(`PgConnection.execute: ${sql}`);
 		var result = await this.client.query(sql, params);
 		//console.dir(result);
 		var rt : Result = {};

@@ -16,7 +16,7 @@ export abstract class BaseRepository<T, ID>{
 	public async findAll():Promise<T[]> {
 		
 		var sql = `select * from ${this.getQuote()}${this.getTableName()}${this.getQuote()}`;
-		console.log(sql);
+		console.debug(sql)
 		var result = await this.execute(sql);
 		return result.data;
 	}
@@ -31,7 +31,7 @@ export abstract class BaseRepository<T, ID>{
 		var values = this.getValues(id, columns);
 		var condition = this.sqlKeys(columns);
 		var sql = `select * from ${this.getQuote()}${this.getTableName()}${this.getQuote()} where ${condition}`;
-		console.log(sql);
+		console.debug(sql);
 		var result: Result = await this.execute(sql, values);
 		if(result.data.length==0) {
 			return null;
@@ -44,7 +44,7 @@ export abstract class BaseRepository<T, ID>{
 
 		var condition = this.sqlKeys(columns);
 		var sql = `delete from ${this.getQuote()}${this.getTableName()}${this.getQuote()} where ${condition}`;
-		console.log(sql);
+		console.debug(sql);
 		await this.execute(sql, values);
 	}		
 	private sqlKeys(columns: string[]) {
@@ -61,7 +61,7 @@ export abstract class BaseRepository<T, ID>{
 		var sqlInsertColumns = this.sqlInsertColumns(columns);
 		var sqlInsert = this.sqlInsert(columns);
 		var sql = `insert into ${this.getQuote()}${this.getTableName()}${this.getQuote()}(${sqlInsertColumns}) values(${sqlInsert})`;
-		console.log(sql);
+		console.debug(sql);
 		await this.execute(sql, values);
 	}
 	private sqlInsertColumns(columns: string[]) {
@@ -87,7 +87,7 @@ export abstract class BaseRepository<T, ID>{
 		var idColumns:string[] = this.getIdColumns(id);
 		var sqlWhere = this.sqlKeys(idColumns);
 		var sql = `update ${this.getQuote()}${this.getTableName()}${this.getQuote()} set ${sqlUpdate} where ${sqlWhere}`;
-		console.log(sql);
+		console.debug(sql);
 		var idColumn = this.getIdColumns(id);
 		var idValue = this.getValues(id, idColumns);
 		var params = values.concat(idValue);

@@ -1,6 +1,6 @@
 {
   "name": "ts-spring",
-  "version": "1.0.0",
+  "version": "0.9.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -10,6 +10,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/cls-hooked": "^4.3.0",
     "@types/express": "^4.17.6",
     "@types/jest": "^25.2.1",
     "@types/mysql": "^2.15.10",
@@ -24,7 +25,6 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
-    "cls-hooked": "^4.2.2",
-    "winston": "^3.2.1"
+    "cls-hooked": "^4.2.2"
   }
 }

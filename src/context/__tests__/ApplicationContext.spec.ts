@@ -1,6 +1,5 @@
 import { createNamespace } from 'cls-hooked';
-import { SqlJsConnectionPool, ApplicationContext, Connection, initSqlJs, txTransaction, logger, txAutoCommit } from '../..';
-
+import { SqlJsConnectionPool, ApplicationContext, Connection, initSqlJs, txTransaction, txAutoCommit } from '../..';
 
 
 
@@ -20,9 +19,9 @@ test("transaction", async () => {
 		let result = await conn.execute('create table test (id integer primary key, name);');
 		console.debug(result);
 		result = await conn.execute("insert into test(id, name) values(1, 'a')");
-		logger.info(result);
+		console.info(result);
 		result = await conn.execute("select * from test");
-		logger.info(result);
+		console.info(result);
 	});
 	
 });
@@ -44,9 +43,9 @@ test("auto commit", async () => {
 		let result = await conn.execute('create table test (id integer primary key, name);');
 		console.debug(result);
 		result = await conn.execute("insert into test(id, name) values(1, 'a')");
-		logger.info(result);
+		console.info(result);
 		result = await conn.execute("select * from test");
-		logger.info(result);
+		console.info(result);
 	});
 	
 });

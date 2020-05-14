@@ -3,8 +3,11 @@ import { Connection } from "../../../Connection";
 import { MySqlConnection } from ".."
 import { Result } from "../../..";
 
-//ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '1234';
-//flush privileges;
+/*
+mysql -u root -p
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '1234';
+flush privileges;
+*/
 
 const config = {
 	host     : 'localhost',
